@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TetesDePioche\LaravelModularApi;
 
 use Illuminate\Support\ServiceProvider;
+use TetesDePioche\LaravelModularApi\Providers\RouteServiceProvider;
 
 class LaravelModularApiServiceProvider extends ServiceProvider
 {
@@ -14,6 +15,8 @@ class LaravelModularApiServiceProvider extends ServiceProvider
             __DIR__ . '/../config/modular-api.php',
             'modular-api'
         );
+
+        $this->app->register(RouteServiceProvider::class);
     }
 
     public function boot(): void
