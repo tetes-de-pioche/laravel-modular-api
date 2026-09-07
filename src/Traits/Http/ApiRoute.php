@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use LaravelModularApi;
 use Symfony\Component\Finder\SplFileInfo;
+use TetesDePioche\LaravelModularApi\Http\Middlewares\IdentifyApiType;
 use TetesDePioche\LaravelModularApi\Http\Middlewares\Localization;
 
 trait ApiRoute
@@ -71,6 +72,7 @@ trait ApiRoute
         return array_filter([
             'api',
             $this->middlewareRateLimiter(),
+            $this->middlewareIdentifyApiType(),
             $this->middlewareLocalization(),
         ]);
     }
@@ -95,6 +97,13 @@ trait ApiRoute
     {
         return config('modular-api.features.localization.enabled')
             ? Localization::class
+            : null;
+    }
+
+    private function middlewareIdentifyApiType(): ?string
+    {
+        return config('modular-api.api.routing.enable_type_prefix')
+            ? IdentifyApiType::class
             : null;
     }
 
