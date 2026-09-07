@@ -10,12 +10,13 @@ use TetesDePioche\LaravelModularApi\Features\ObfuscatedIdEncoder;
 use TetesDePioche\LaravelModularApi\Providers\RouteServiceProvider;
 use TetesDePioche\LaravelModularApi\Traits\Config\HasConfigs;
 use TetesDePioche\LaravelModularApi\Traits\Data\HasMigrations;
+use TetesDePioche\LaravelModularApi\Traits\Data\HasQueryMacros;
 use TetesDePioche\LaravelModularApi\Traits\Providers\HasProviders;
 use TetesDePioche\LaravelModularApi\Traits\Views\HasViews;
 
 class LaravelModularApiServiceProvider extends ServiceProvider
 {
-    use HasConfigs, HasMigrations, HasProviders, HasViews;
+    use HasConfigs, HasMigrations, HasProviders, HasQueryMacros, HasViews;
 
     public function register(): void
     {
@@ -43,6 +44,7 @@ class LaravelModularApiServiceProvider extends ServiceProvider
         }
 
         $this->loadViews();
+        $this->registerQueryMacros();
     }
 
     private function registerExceptionHandler(): void
