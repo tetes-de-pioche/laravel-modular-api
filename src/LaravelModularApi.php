@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace TetesDePioche\LaravelModularApi;
 
 use Illuminate\Support\Str;
+use TetesDePioche\LaravelModularApi\Traits\Services\Util as ServicesUtil;
 
 class LaravelModularApi
 {
+    use ServicesUtil;
+
     public function apiUrl(): string
     {
         return config('modular-api.api.routing.url', '');
