@@ -8,9 +8,12 @@ use Illuminate\Support\ServiceProvider;
 use TetesDePioche\LaravelModularApi\Exceptions\Handler as ExceptionHandler;
 use TetesDePioche\LaravelModularApi\Features\ObfuscatedIdEncoder;
 use TetesDePioche\LaravelModularApi\Providers\RouteServiceProvider;
+use TetesDePioche\LaravelModularApi\Traits\Data\HasMigrations;
 
 class LaravelModularApiServiceProvider extends ServiceProvider
 {
+    use HasMigrations;
+
     public function register(): void
     {
         $this->mergeConfigFrom(
@@ -30,6 +33,8 @@ class LaravelModularApiServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__ . '/../config/modular-api.php' => config_path('modular-api.php'),
             ], 'modular-api-config');
+
+            $this->loadMigrations();
         }
     }
 
