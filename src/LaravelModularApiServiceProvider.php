@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TetesDePioche\LaravelModularApi;
 
 use Illuminate\Support\ServiceProvider;
+use TetesDePioche\LaravelModularApi\Exceptions\Handler as ExceptionHandler;
 use TetesDePioche\LaravelModularApi\Providers\RouteServiceProvider;
 
 class LaravelModularApiServiceProvider extends ServiceProvider
@@ -16,6 +17,8 @@ class LaravelModularApiServiceProvider extends ServiceProvider
             'modular-api'
         );
 
+        $this->registerExceptionHandler();
+
         $this->app->register(RouteServiceProvider::class);
     }
 
@@ -26,5 +29,13 @@ class LaravelModularApiServiceProvider extends ServiceProvider
                 __DIR__ . '/../config/modular-api.php' => config_path('modular-api.php'),
             ], 'modular-api-config');
         }
+    }
+
+    private function registerExceptionHandler(): void
+    {
+        $this->app->singleton(
+            \Illuminate\Contracts\Debug\ExceptionHandler::class,
+            ExceptionHandler::class
+        );
     }
 }
