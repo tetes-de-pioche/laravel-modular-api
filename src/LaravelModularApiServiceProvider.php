@@ -9,11 +9,12 @@ use TetesDePioche\LaravelModularApi\Exceptions\Handler as ExceptionHandler;
 use TetesDePioche\LaravelModularApi\Features\ObfuscatedIdEncoder;
 use TetesDePioche\LaravelModularApi\Providers\RouteServiceProvider;
 use TetesDePioche\LaravelModularApi\Traits\Data\HasMigrations;
+use TetesDePioche\LaravelModularApi\Traits\Providers\HasProviders;
 use TetesDePioche\LaravelModularApi\Traits\Views\HasViews;
 
 class LaravelModularApiServiceProvider extends ServiceProvider
 {
-    use HasMigrations, HasViews;
+    use HasMigrations, HasProviders, HasViews;
 
     public function register(): void
     {
@@ -26,6 +27,7 @@ class LaravelModularApiServiceProvider extends ServiceProvider
         $this->registerObfuscatedIdEncoder();
 
         $this->app->register(RouteServiceProvider::class);
+        $this->loadProviders();
     }
 
     public function boot(): void
