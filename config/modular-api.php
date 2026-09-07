@@ -22,6 +22,11 @@ return [
             'custom_type_resolver' => env('MODULAR_API_RESOURCE_CUSTOM_TYPE_RESOLVER', false),
         ],
 
+        'pagination' => [
+            'size_default' => env('MODULAR_API_PAGINATION_SIZE_DEFAULT', 25),
+            'size_max' => env('MODULAR_API_PAGINATION_SIZE_MAX', 100),
+        ],
+
     ],
 
     /*
