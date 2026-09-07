@@ -46,6 +46,16 @@ return [
             'expires' => env('MODULAR_API_FEATURE_RATE_LIMITING_EXPIRES_IN_MIN', 1),
         ],
 
+        'obfuscated_ids' => [
+            'enabled' => env('MODULAR_API_FEATURE_OBFUSCATED_IDS_ENABLED', false),
+            'key' => env('MODULAR_API_FEATURE_OBFUSCATED_IDS_KEY', env('APP_KEY')),
+            'min_length' => env('MODULAR_API_FEATURE_OBFUSCATED_IDS_MIN_LENGTH', 20),
+            'alphabet' => env(
+                'MODULAR_API_FEATURE_OBFUSCATED_IDS_ALPHABET',
+                'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
+            ),
+        ],
+
     ],
 
 ];
