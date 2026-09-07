@@ -7,9 +7,11 @@ namespace TetesDePioche\LaravelModularApi\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\JsonApi\JsonApiResource;
 use TetesDePioche\LaravelModularApi\Traits\Features\ObfuscatedId;
+use TetesDePioche\LaravelModularApi\Traits\Resources\HasLinks;
 
 class ApiResource extends JsonApiResource
 {
+    use HasLinks;
     use ObfuscatedId;
 
     public function toId(Request $request): string
