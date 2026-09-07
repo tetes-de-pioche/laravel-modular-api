@@ -6,6 +6,7 @@ namespace TetesDePioche\LaravelModularApi;
 
 use Illuminate\Support\ServiceProvider;
 use TetesDePioche\LaravelModularApi\Exceptions\Handler as ExceptionHandler;
+use TetesDePioche\LaravelModularApi\Features\ObfuscatedIdEncoder;
 use TetesDePioche\LaravelModularApi\Providers\RouteServiceProvider;
 
 class LaravelModularApiServiceProvider extends ServiceProvider
@@ -18,6 +19,7 @@ class LaravelModularApiServiceProvider extends ServiceProvider
         );
 
         $this->registerExceptionHandler();
+        $this->registerObfuscatedIdEncoder();
 
         $this->app->register(RouteServiceProvider::class);
     }
@@ -37,5 +39,15 @@ class LaravelModularApiServiceProvider extends ServiceProvider
             \Illuminate\Contracts\Debug\ExceptionHandler::class,
             ExceptionHandler::class
         );
+    }
+
+    /**
+     * The encoder memoizes its Sqids instances, which are derived from the
+     * configuration and therefore safe to share across requests. Bind another
+     * implementation to change how identifiers are obfuscated.
+     */
+    private function registerObfuscatedIdEncoder(): void
+    {
+        $this->app->singleton(ObfuscatedIdEncoder::class);
     }
 }
