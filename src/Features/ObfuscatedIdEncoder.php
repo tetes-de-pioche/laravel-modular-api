@@ -39,7 +39,8 @@ class ObfuscatedIdEncoder
     }
 
     /**
-     * Returns the value untouched when the feature is disabled.
+     * Returns the value untouched when the feature is disabled, and null for a
+     * null input.
      *
      * @param  array{alphabet?: string, key?: string, min_length?: int}  $options
      */
@@ -47,6 +48,10 @@ class ObfuscatedIdEncoder
     {
         if (! $this->isEnabled()) {
             return $value;
+        }
+
+        if ($value === null) {
+            return null;
         }
 
         return $this->sqids($options)->encode(
