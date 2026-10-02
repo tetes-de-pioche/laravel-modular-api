@@ -30,6 +30,26 @@ trait ObfuscatedId
             : $value;
     }
 
+    /**
+     * @param  array<int, mixed>  $values
+     * @param  array{alphabet?: string, key?: string, min_length?: int}  $options
+     * @return array<int, mixed>
+     */
+    public function encodeMany(array $values, array $options = []): array
+    {
+        return array_map(fn(mixed $value): mixed => $this->encode($value, $options), $values);
+    }
+
+    /**
+     * @param  array<int, mixed>  $values
+     * @param  array{alphabet?: string, key?: string, min_length?: int}  $options
+     * @return array<int, mixed>
+     */
+    public function decodeMany(array $values, array $options = []): array
+    {
+        return array_map(fn(mixed $value): mixed => $this->decode($value, $options), $values);
+    }
+
     private function obfuscatedIdEncoder(): ObfuscatedIdEncoder
     {
         return app(ObfuscatedIdEncoder::class);
